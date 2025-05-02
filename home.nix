@@ -167,6 +167,7 @@
     shellAliases = {
       ll = "lsd -la";
       update = "sudo nixos-rebuild switch --flake .";
+      garbage = "sudo nix-collect-garbage -d";
     };
   };
   # This value determines the home Manager release that your
@@ -182,6 +183,6 @@
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ./ghostty.nix ./hypr.nix ./starship.nix ];
+  imports = [ ./ghostty.nix ./hypr.nix ./starship.nix ./helix.nix ];
 }
 
