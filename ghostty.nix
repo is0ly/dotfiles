@@ -3,6 +3,11 @@
 {
   programs.ghostty = {
     enable = true;
-    extraConfig = builtins.readFile ./config;
+    settings = {
+      font-family = "Iosevka Nerd Font";
+      font-size = 14;
+      theme = "GruvboxDark";
+      background-opacity = 0.9;
+    };
   };
 }
