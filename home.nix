@@ -182,6 +182,6 @@
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ./ghostty.nix ./hypr.nix ./starship.toml ];
+  imports = [ ./ghostty.nix ./hypr.nix ./starship.nix ];
 }
 
