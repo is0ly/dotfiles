@@ -15,6 +15,7 @@
     dunst
     wl-clipboard
     cliphist
+    starship
 
     # archives
     zip
@@ -37,7 +38,6 @@
     xplr
     babashka
     emacs
-    #zsh
     neovim
 
     #lsp
@@ -135,7 +135,40 @@
 
   #programs.nushell = { enable = true; };
   #
-  programs.zsh = { enable = true; };
+  #programs.zsh = { enable = true; };
+  # Включение Zsh
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
+    # Настройка Zap
+    initContent = ''
+      # Установка Zap, если он ещё не установлен
+      if [[ ! -f ~/.zap/zap.zsh ]]; then
+        mkdir -p ~/.zap
+        git clone --depth 1 https://github.com/zap-zsh/zap.git ~/.zap
+      fi
+      source ~/.zap/zap.zsh
+
+      # Декларативное подключение плагинов через Zap
+      plug "zap-zsh/zap"
+      #plug "zap-zsh/users"
+      #plug "zap-zsh/exa"
+      plug "wintermi/zsh-starship"
+      plug "zsh-users/zsh-syntax-highlighting"
+      plug "zsh-users/zsh-autosuggestions"
+
+      eval "$(starship init zsh)"
+    '';
+
+    # Опционально: кастомные алиасы или настройки
+    shellAliases = {
+      ll = "lsd -la";
+      update = "sudo nixos-rebuild switch --flake .";
+    };
+  };
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
@@ -149,6 +182,6 @@
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ./ghostty.nix ./hypr.nix ./helix.nix ];
+  imports = [ ./ghostty.nix ./hypr.nix ./starship.toml ];
 }
 
