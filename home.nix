@@ -38,7 +38,6 @@
     babashka
     emacs
     zsh
-    ghostty
     neovim
 
     #lsp
@@ -149,6 +148,13 @@
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ./foot.nix ./kitty.nix ./hypr.nix ./helix.nix ./starship.nix ];
+  imports = [
+    ./ghostty.nix
+    ./foot.nix
+    ./kitty.nix
+    ./hypr.nix
+    ./helix.nix
+    ./starship.nix
+  ];
 }
 
