@@ -34,6 +34,8 @@
 
   environment.systemPackages = with pkgs; [ git curl wget ];
 
+  environment.shells = with pkgs; [ zsh ];
+
   services.openssh.enable = true;
 
   system.stateVersion = "24.11"; # Did you read the comment?

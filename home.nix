@@ -135,15 +135,7 @@
 
   #programs.nushell = { enable = true; };
   #
-  programs.zsh = {
-    enable = true;
-
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
-    };
-    history.size = 10000;
-  };
+  programs.zsh = { enable = true; };
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
