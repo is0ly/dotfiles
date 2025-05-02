@@ -37,7 +37,7 @@
     xplr
     babashka
     emacs
-    zsh
+    #zsh
     neovim
 
     #lsp
@@ -133,8 +133,17 @@
     userEmail = "iljaosipov@gmail.com";
   };
 
-  programs.nushell = { enable = true; };
+  #programs.nushell = { enable = true; };
+  #
+  programs.zsh = {
+    enable = true;
 
+    shellAliases = {
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch";
+    };
+    history.size = 10000;
+  };
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
@@ -148,6 +157,6 @@
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports = [ ./ghostty.nix ./kitty.nix ./hypr.nix ./helix.nix ./starship.nix ];
+  imports = [ ./ghostty.nix ./hypr.nix ./helix.nix ];
 }
 

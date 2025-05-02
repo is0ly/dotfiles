@@ -22,11 +22,13 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  programs.zsh.enable = true;
+
   users.users.ilia = {
     isNormalUser = true;
     description = "ilia";
-    extraGroups = [ "wheel" "networkmanager"];
-    shell = pkgs.nushell;
+    extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [ ];
   };
 
