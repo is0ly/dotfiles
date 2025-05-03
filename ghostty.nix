@@ -7,7 +7,7 @@
       font-family = "Iosevka Nerd Font";
       font-size = 14;
       theme = "GruvboxDark";
-      background-opacity = 0.9;
+      background-opacity = 0.8;
     };
   };
 }
