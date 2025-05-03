@@ -39,6 +39,8 @@
     babashka
     emacs
     neovim
+    xray
+    proxychains
 
     #lsp
     clojure-lsp
@@ -170,6 +172,8 @@
       ll = "lsd -la";
       update = "sudo nixos-rebuild switch --flake .";
       garbage = "sudo nix-collect-garbage -d";
+      get-rust =
+        "nix flake init --template github:is0ly/rust-dev#default --refresh";
     };
   };
 
