@@ -41,9 +41,10 @@
     neovim
     xray
     proxychains
+    hyperfine
 
     #lsp
-    clojure-lsp
+    #clojure-lsp
 
     # networking tools
     mtr # A network diagnostic tool
@@ -120,7 +121,8 @@
 
     # programming languages
     racket
-    clang
+    #clang
+    #clang-tools
 
     #torrent
     qbittorrent
