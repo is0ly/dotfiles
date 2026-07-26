@@ -13,11 +13,11 @@
   outputs =
     { nixpkgs, home-manager, ... }:
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
+      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
 
         modules = [
-          ./hosts/nixos/configuration.nix
+          ./hosts/desktop/configuration.nix
 
           home-manager.nixosModules.home-manager
 

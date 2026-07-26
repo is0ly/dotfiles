@@ -6,9 +6,8 @@
     ./zsh.nix
     ./git.nix
     ./neovim.nix
-    ./waybar.nix
-    ./niri.nix
     ./foot.nix
+    ./hyprland.nix
   ];
 
   home.username = "ilia";
