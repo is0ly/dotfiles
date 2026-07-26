@@ -20,8 +20,8 @@ The interactive installer:
 
 1. detects the target hardware with `nixos-generate-config --no-filesystems`;
 2. enables NVIDIA support only when an NVIDIA PCI device is present;
-3. shows physical disks and their persistent `/dev/disk/by-id` names;
-4. asks which whole disk to use and validates the selection;
+3. shows only whole physical disks with numbered `/dev/disk/by-id` entries;
+4. asks which disk number to use and validates the selection;
 5. runs `disko-install --dry-run`;
 6. requires an explicit `ERASE` confirmation;
 7. asks twice for the LUKS and `ilia` login passwords;

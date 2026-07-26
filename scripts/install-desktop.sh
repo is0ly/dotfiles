@@ -74,25 +74,46 @@ unset nvidia_enabled
 
 flake_ref="path:$working_flake#$flake_attribute"
 
-printf '\nAvailable physical disks:\n\n'
-lsblk -d -p -o NAME,SIZE,MODEL,SERIAL,TYPE
+disk_devices=()
+disk_ids=()
 
-printf '\nPersistent disk names:\n\n'
-ls -l /dev/disk/by-id/
+while read -r device device_type; do
+  [[ "$device_type" == "disk" ]] || continue
 
-printf '\nEnter the full path of the target disk from /dev/disk/by-id/:\n> '
-read -r target_disk
+  persistent_id=""
+  for candidate in /dev/disk/by-id/*; do
+    [[ -L "$candidate" ]] || continue
+    [[ "$candidate" == *-part* ]] && continue
 
-case "$target_disk" in
-  /dev/disk/by-id/*) ;;
-  *) fail "use a full path from /dev/disk/by-id/" ;;
-esac
+    if [[ "$(readlink -f -- "$candidate")" == "$device" ]]; then
+      persistent_id="$candidate"
+      break
+    fi
+  done
 
-[[ -b "$target_disk" ]] || fail "$target_disk is not a block device"
+  [[ -n "$persistent_id" ]] || continue
+  disk_devices+=("$device")
+  disk_ids+=("$persistent_id")
+done < <(lsblk -d -n -p -o NAME,TYPE)
 
-resolved_disk="$(readlink -f -- "$target_disk")"
-disk_type="$(lsblk -d -n -o TYPE -- "$resolved_disk")"
-[[ "$disk_type" == "disk" ]] || fail "select a whole disk, not a partition"
+[[ "${#disk_devices[@]}" -gt 0 ]] || fail "no installable disks were found"
+
+printf '\nAvailable installation disks:\n\n'
+for index in "${!disk_devices[@]}"; do
+  printf '[%d] ' "$((index + 1))"
+  lsblk -d -n -o NAME,SIZE,MODEL,SERIAL -- "${disk_devices[$index]}"
+  printf '    %s\n' "${disk_ids[$index]}"
+done
+
+printf '\nSelect the target disk by number:\n> '
+read -r disk_selection
+
+[[ "$disk_selection" =~ ^[0-9]+$ ]] || fail "enter a valid disk number"
+((disk_selection >= 1 && disk_selection <= ${#disk_devices[@]})) \
+  || fail "the selected disk number is out of range"
+
+target_disk="${disk_ids[$((disk_selection - 1))]}"
+resolved_disk="${disk_devices[$((disk_selection - 1))]}"
 [[ ! -e "$luks_password_file" ]] || fail "$luks_password_file already exists"
 
 printf '\nThe following disk will be completely erased:\n\n'
