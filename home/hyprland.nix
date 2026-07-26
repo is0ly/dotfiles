@@ -46,10 +46,6 @@ in
         disable_splash_rendering = true;
       };
 
-      exec-once = [
-        "uwsm app -- waybar"
-      ];
-
       bind = [
         "${modifier}, Return, exec, uwsm app -- ${terminal}"
         "${modifier}, D, exec, uwsm app -- ${menu}"
