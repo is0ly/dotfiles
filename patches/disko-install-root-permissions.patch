@@ -1,0 +1,15 @@
+diff --git a/disko-install b/disko-install
+index 5feaa62..f6c9c86 100755
+--- a/disko-install
++++ b/disko-install
+@@ -271,6 +271,10 @@ main() {
+   # Hopefully disko-install has enough RAM to run without swap, otherwise we can make this configurable in future.
+   DISKO_SKIP_SWAP=1 "$disko_script"
+ 
++  # Mounting the target filesystem can replace the permissions set on the
++  # mount point before the disko script runs. nixos-install requires 0755.
++  chmod 755 "$mountPoint"
++
+   for source in "${!extraFiles[@]}"; do
+     destination=${extraFiles[$source]}
+     mkdir -p "$mountPoint/$(dirname "$destination")"

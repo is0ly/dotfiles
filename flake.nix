@@ -27,6 +27,12 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
+      diskoInstall = disko.packages.${system}.disko-install.overrideAttrs (oldAttrs: {
+        patches = (oldAttrs.patches or [ ]) ++ [
+          ./patches/disko-install-root-permissions.patch
+        ];
+      });
+
       installer = pkgs.writeShellApplication {
         name = "install-desktop";
         runtimeInputs = [
@@ -36,7 +42,7 @@
           pkgs.nixos-install-tools
           pkgs.pciutils
           pkgs.util-linux
-          disko.packages.${system}.disko-install
+          diskoInstall
         ];
         text = ''
           export NIXOS_INSTALL_FLAKE=${self.outPath}#desktop
