@@ -17,14 +17,33 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       disko,
       ...
     }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      installer = pkgs.writeShellApplication {
+        name = "install-desktop";
+        runtimeInputs = [
+          pkgs.coreutils
+          pkgs.mkpasswd
+          pkgs.util-linux
+          disko.packages.${system}.disko-install
+        ];
+        text = ''
+          export NIXOS_INSTALL_FLAKE=${self.outPath}#desktop
+        ''
+        + builtins.readFile ./scripts/install-desktop.sh;
+      };
+    in
     {
       nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
 
         modules = [
           disko.nixosModules.disko
@@ -38,6 +57,11 @@
             home-manager.users.ilia = import ./home/default.nix;
           }
         ];
+      };
+
+      apps.${system}.install = {
+        type = "app";
+        program = "${installer}/bin/install-desktop";
       };
     };
 }

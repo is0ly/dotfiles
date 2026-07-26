@@ -8,69 +8,21 @@ Home Manager, LUKS and Btrfs.
 The repository can be installed directly from a public Git host. Cloning it in
 the live environment is not required.
 
-### 1. Identify the target disk
+Boot the x86-64 NixOS Live ISO, connect to the internet and run:
 
 ```console
-$ lsblk -d -o NAME,SIZE,MODEL,SERIAL
-$ ls -l /dev/disk/by-id/
+$ sudo nix run 'github:is0ly/dotfiles#install'
 ```
 
-Use the whole-disk path from `/dev/disk/by-id`, not a name such as
-`/dev/nvme0n1`. Carefully verify the selected model, capacity and serial
-number—the installation destroys all data on that disk.
+The interactive installer:
 
-### 2. Check the installation plan
-
-Replace `OWNER/REPOSITORY` and the example disk ID:
-
-```console
-$ sudo nix run github:nix-community/disko#disko-install -- \
-    --dry-run \
-    --flake 'github:OWNER/REPOSITORY#desktop' \
-    --disk main '/dev/disk/by-id/nvme-WD_BLACK_SN850X_2000GB_SERIAL' \
-    --write-efi-boot-entries
-```
-
-The dry run builds and prints the installation actions without partitioning or
-formatting the target disk.
-
-### 3. Create the temporary LUKS password file
-
-```console
-$ sudo bash -c '
-    umask 077
-    read -rsp "New LUKS password: " password
-    printf "\n"
-    read -rsp "Repeat LUKS password: " confirmation
-    printf "\n"
-    test "$password" = "$confirmation" || {
-      echo "Passwords do not match"
-      exit 1
-    }
-    printf "%s" "$password" > /tmp/disko-password
-  '
-```
-
-The password file is read only while LUKS is created. It is not copied into the
-installed system.
-
-### 4. Install
-
-Run the same command without `--dry-run`:
-
-```console
-$ sudo nix run github:nix-community/disko#disko-install -- \
-    --flake 'github:OWNER/REPOSITORY#desktop' \
-    --disk main '/dev/disk/by-id/nvme-WD_BLACK_SN850X_2000GB_SERIAL' \
-    --write-efi-boot-entries
-```
-
-After a successful installation:
-
-```console
-$ sudo rm -f /tmp/disko-password
-$ reboot
-```
+1. shows physical disks and their persistent `/dev/disk/by-id` names;
+2. asks which whole disk to use and validates the selection;
+3. runs `disko-install --dry-run`;
+4. requires an explicit `ERASE` confirmation;
+5. asks twice for the LUKS and `ilia` login passwords;
+6. partitions, formats and installs the system;
+7. removes temporary password files automatically.
 
 ## Target-specific hardware configuration
 
