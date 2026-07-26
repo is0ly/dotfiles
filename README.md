@@ -11,7 +11,9 @@ the live environment is not required.
 Boot the x86-64 NixOS Live ISO, connect to the internet and run:
 
 ```console
-$ sudo nix run 'github:is0ly/dotfiles#install'
+$ sudo nix \
+    --extra-experimental-features 'nix-command flakes' \
+    run 'github:is0ly/dotfiles#install'
 ```
 
 The interactive installer:
