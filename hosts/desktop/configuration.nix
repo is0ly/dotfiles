@@ -5,6 +5,8 @@
 
 {
   imports = [
+    ./disk.nix
+    ./hardware-configuration.nix
     ./hyprland.nix
     ./nvidia.nix
   ];

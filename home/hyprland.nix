@@ -6,8 +6,8 @@
 
     settings = {
       "$mod" = "SUPER";
-      "$terminal" = "foot";
-      "$menu" = "wofi --show drun";
+      "$terminal" = "ghostty";
+      "$menu" = "fuzzel";
 
       # Let Hyprland choose the preferred mode for every connected display.
       # Machine-specific monitor layout can be added here later.

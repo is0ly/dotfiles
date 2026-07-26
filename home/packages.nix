@@ -2,8 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    foot
-    wofi
     waybar
     git
     lsd

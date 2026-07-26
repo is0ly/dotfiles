@@ -6,7 +6,8 @@
     ./zsh.nix
     ./git.nix
     ./neovim.nix
-    ./foot.nix
+    ./ghostty.nix
+    ./fuzzel.nix
     ./hyprland.nix
   ];
 

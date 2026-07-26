@@ -8,26 +8,14 @@
     systemd.enable = true;
 
     settings = {
-      "font-family" = "Iosevka Nerd Font Mono";
-      "font-size" = 14;
+      "font-family" = "IoskeleyMono Nerd term Font SemiCondensed";
+      "font-size" = 20;
 
-      theme = "Catppuccin Mocha";
+      theme = "Gruvbox Dark Hard";
 
-      background = "1e1e2e";
-      "background-opacity" = 0.90;
+      "background-opacity" = 0.9;
 
-      "window-padding-x" = 16;
-      "window-padding-y" = 12;
-      "window-padding-balance" = true;
-
-      "window-decoration" = "none";
-      "window-show-tab-bar" = "never";
-
-      "cursor-style" = "block";
-      "cursor-style-blink" = false;
-
-      "shell-integration" = "zsh";
-      "shell-integration-features" = "cursor,sudo,title";
+      # fullscreen = true;
     };
   };
 }
