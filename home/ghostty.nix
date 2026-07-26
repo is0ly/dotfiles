@@ -8,7 +8,7 @@
     systemd.enable = true;
 
     settings = {
-      "font-family" = "IoskeleyMono Nerd term Font SemiCondensed";
+      "font-family" = "IoskeleyMonoTerm Nerd Font SemiCondensed";
       "font-size" = 20;
 
       theme = "Gruvbox Dark Hard";

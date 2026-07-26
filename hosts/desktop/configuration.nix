@@ -38,9 +38,8 @@
   security.polkit.enable = true;
 
   fonts.packages = with pkgs; [
-    nerd-fonts.iosevka
     nerd-fonts.jetbrains-mono
-    ioskeley-mono.normal-NF
+    ioskeley-mono.semiCondensed-term-NF
   ];
 
   programs.zsh.enable = true;
