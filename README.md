@@ -16,28 +16,32 @@ $ sudo nix run 'github:is0ly/dotfiles#install'
 
 The interactive installer:
 
-1. shows physical disks and their persistent `/dev/disk/by-id` names;
-2. asks which whole disk to use and validates the selection;
-3. runs `disko-install --dry-run`;
-4. requires an explicit `ERASE` confirmation;
-5. asks twice for the LUKS and `ilia` login passwords;
-6. partitions, formats and installs the system;
-7. removes temporary password files automatically.
+1. detects the target hardware with `nixos-generate-config --no-filesystems`;
+2. shows physical disks and their persistent `/dev/disk/by-id` names;
+3. asks which whole disk to use and validates the selection;
+4. runs `disko-install --dry-run`;
+5. requires an explicit `ERASE` confirmation;
+6. asks twice for the LUKS and `ilia` login passwords;
+7. partitions, formats and installs the system;
+8. copies the exact generated configuration to `/etc/nixos`;
+9. removes temporary password files automatically.
 
 ## Target-specific hardware configuration
 
-`hosts/desktop/hardware-configuration.nix` contains a portable NVMe desktop
-baseline so the remote flake can be installed without first cloning and editing
-the repository.
-
-After the first boot, generate the exact hardware module on the desktop:
+`hosts/desktop/hardware-configuration.nix` is a portable NVMe fallback used
+only before the installer runs. The installer copies the flake to a temporary
+directory and replaces this file with output from:
 
 ```console
-$ sudo nixos-generate-config --show-hardware-config \
-    > /tmp/hardware-configuration.nix
+$ nixos-generate-config --show-hardware-config --no-filesystems
 ```
 
-Review it, remove any `fileSystems` and `swapDevices` definitions, then replace
-`hosts/desktop/hardware-configuration.nix` and commit the result. Disk layout,
-filesystems, Btrfs subvolumes and mount points remain exclusively in
-`hosts/desktop/disk.nix`.
+The generated module is used for both the dry run and the actual system build.
+The complete resulting flake is copied to `/etc/nixos` in the installed system.
+Disk layout, filesystems, Btrfs subvolumes and mount points remain exclusively
+under Disko's control.
+
+After the first successful boot, review
+`/etc/nixos/hosts/desktop/hardware-configuration.nix` and commit it back to the
+repository. Future reinstalls of the same computer will then also have the exact
+hardware module available as a fallback.

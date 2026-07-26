@@ -6,6 +6,7 @@ flake_ref="${NIXOS_INSTALL_FLAKE:-github:is0ly/dotfiles#desktop}"
 luks_password_file="/tmp/disko-password"
 luks_password_created=false
 temporary_directory=""
+working_flake=""
 
 cleanup() {
   unset luks_password luks_confirmation login_password login_confirmation
@@ -14,9 +15,8 @@ cleanup() {
     rm -f -- "$luks_password_file"
   fi
 
-  if [[ -n "$temporary_directory" && -d "$temporary_directory" ]]; then
-    rm -f -- "$temporary_directory/system-config.json"
-    rmdir -- "$temporary_directory"
+  if [[ "$temporary_directory" == /tmp/nixos-desktop-install.* ]]; then
+    rm -rf -- "$temporary_directory"
   fi
 }
 
@@ -34,6 +34,28 @@ fi
 if [[ "$EUID" -ne 0 ]]; then
   fail "run this command with sudo"
 fi
+
+source_flake="${flake_ref%#*}"
+flake_attribute="${flake_ref##*#}"
+
+[[ -d "$source_flake" ]] || fail "cannot access the installer flake source"
+[[ -n "$flake_attribute" ]] || fail "the installer flake attribute is missing"
+
+temporary_directory="$(mktemp -d /tmp/nixos-desktop-install.XXXXXXXXXX)"
+working_flake="$temporary_directory/config"
+mkdir -p -- "$working_flake"
+cp -a -- "$source_flake/." "$working_flake/"
+
+hardware_config="$working_flake/hosts/desktop/hardware-configuration.nix"
+chmod u+w -- "$hardware_config"
+
+printf '\nDetecting hardware for the target configuration.\n\n'
+nixos-generate-config \
+  --show-hardware-config \
+  --no-filesystems \
+  > "$hardware_config"
+
+flake_ref="path:$working_flake#$flake_attribute"
 
 printf '\nAvailable physical disks:\n\n'
 lsblk -d -p -o NAME,SIZE,MODEL,SERIAL,TYPE
@@ -108,7 +130,6 @@ done
 login_hash="$(printf '%s\n' "$login_password" | mkpasswd -m yescrypt -s)"
 unset login_password login_confirmation
 
-temporary_directory="$(mktemp -d)"
 system_config="$temporary_directory/system-config.json"
 
 printf \
@@ -122,6 +143,9 @@ disko-install \
   --flake "$flake_ref" \
   --disk main "$target_disk" \
   --system-config "$(< "$system_config")" \
+  --extra-files "$working_flake" /etc/nixos \
   --write-efi-boot-entries
 
-printf '\nInstallation complete. Reboot the computer and remove the Live ISO.\n'
+printf '\nInstallation complete.\n'
+printf 'The detected hardware configuration was copied to /etc/nixos.\n'
+printf 'Reboot the computer and remove the Live ISO.\n'

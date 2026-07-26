@@ -32,6 +32,7 @@
         runtimeInputs = [
           pkgs.coreutils
           pkgs.mkpasswd
+          pkgs.nixos-install-tools
           pkgs.util-linux
           disko.packages.${system}.disko-install
         ];
