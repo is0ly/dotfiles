@@ -7,7 +7,7 @@
     viAlias = true;
     vimAlias = true;
 
-    extraLuaConfig = ''
+    initLua = ''
       local nix_format_group =
         vim.api.nvim_create_augroup("NixFormatOnSave", { clear = true })
 
