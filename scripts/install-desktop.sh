@@ -145,8 +145,10 @@ while true; do
   printf 'The LUKS passwords do not match.\n' >&2
 done
 
-umask 077
-printf '%s' "$luks_password" > "$luks_password_file"
+(
+  umask 077
+  printf '%s' "$luks_password" > "$luks_password_file"
+)
 luks_password_created=true
 unset luks_password luks_confirmation
 
