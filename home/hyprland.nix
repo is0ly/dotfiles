@@ -1,14 +1,15 @@
 { ... }:
 
+let
+  modifier = "SUPER";
+  terminal = "ghostty";
+  menu = "fuzzel";
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
 
     settings = {
-      "$mod" = "SUPER";
-      "$terminal" = "ghostty";
-      "$menu" = "fuzzel";
-
       # Let Hyprland choose the preferred mode for every connected display.
       # Machine-specific monitor layout can be added here later.
       monitor = [ ",preferred,auto,1" ];
@@ -50,33 +51,33 @@
       ];
 
       bind = [
-        "$mod, Return, exec, uwsm app -- $terminal"
-        "$mod, D, exec, uwsm app -- $menu"
-        "$mod, Q, killactive"
-        "$mod, M, exit"
-        "$mod, F, fullscreen"
-        "$mod, Space, togglefloating"
+        "${modifier}, Return, exec, uwsm app -- ${terminal}"
+        "${modifier}, D, exec, uwsm app -- ${menu}"
+        "${modifier}, Q, killactive"
+        "${modifier}, M, exit"
+        "${modifier}, F, fullscreen"
+        "${modifier}, Space, togglefloating"
 
-        "$mod, H, movefocus, l"
-        "$mod, L, movefocus, r"
-        "$mod, K, movefocus, u"
-        "$mod, J, movefocus, d"
+        "${modifier}, H, movefocus, l"
+        "${modifier}, L, movefocus, r"
+        "${modifier}, K, movefocus, u"
+        "${modifier}, J, movefocus, d"
 
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
+        "${modifier}, 1, workspace, 1"
+        "${modifier}, 2, workspace, 2"
+        "${modifier}, 3, workspace, 3"
+        "${modifier}, 4, workspace, 4"
+        "${modifier}, 5, workspace, 5"
+        "${modifier} SHIFT, 1, movetoworkspace, 1"
+        "${modifier} SHIFT, 2, movetoworkspace, 2"
+        "${modifier} SHIFT, 3, movetoworkspace, 3"
+        "${modifier} SHIFT, 4, movetoworkspace, 4"
+        "${modifier} SHIFT, 5, movetoworkspace, 5"
       ];
 
       bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
+        "${modifier}, mouse:272, movewindow"
+        "${modifier}, mouse:273, resizewindow"
       ];
     };
   };
