@@ -31,8 +31,10 @@
         name = "install-desktop";
         runtimeInputs = [
           pkgs.coreutils
+          pkgs.gnugrep
           pkgs.mkpasswd
           pkgs.nixos-install-tools
+          pkgs.pciutils
           pkgs.util-linux
           disko.packages.${system}.disko-install
         ];

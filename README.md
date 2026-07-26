@@ -17,14 +17,15 @@ $ sudo nix run 'github:is0ly/dotfiles#install'
 The interactive installer:
 
 1. detects the target hardware with `nixos-generate-config --no-filesystems`;
-2. shows physical disks and their persistent `/dev/disk/by-id` names;
-3. asks which whole disk to use and validates the selection;
-4. runs `disko-install --dry-run`;
-5. requires an explicit `ERASE` confirmation;
-6. asks twice for the LUKS and `ilia` login passwords;
-7. partitions, formats and installs the system;
-8. copies the exact generated configuration to `/etc/nixos`;
-9. removes temporary password files automatically.
+2. enables NVIDIA support only when an NVIDIA PCI device is present;
+3. shows physical disks and their persistent `/dev/disk/by-id` names;
+4. asks which whole disk to use and validates the selection;
+5. runs `disko-install --dry-run`;
+6. requires an explicit `ERASE` confirmation;
+7. asks twice for the LUKS and `ilia` login passwords;
+8. partitions, formats and installs the system;
+9. copies the exact generated configuration to `/etc/nixos`;
+10. removes temporary password files automatically.
 
 ## Target-specific hardware configuration
 

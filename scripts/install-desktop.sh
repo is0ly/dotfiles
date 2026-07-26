@@ -55,6 +55,23 @@ nixos-generate-config \
   --no-filesystems \
   > "$hardware_config"
 
+detected_hardware="$working_flake/hosts/desktop/detected-hardware.nix"
+chmod u+w -- "$detected_hardware"
+
+if lspci -Dn | grep -qi ' 10de:'; then
+  nvidia_enabled=true
+  printf 'NVIDIA PCI device detected; NVIDIA support will be enabled.\n'
+else
+  nvidia_enabled=false
+  printf 'No NVIDIA PCI device detected; NVIDIA support will be disabled.\n'
+fi
+
+printf \
+  '{ ... }: { desktop.nvidia.enable = %s; }\n' \
+  "$nvidia_enabled" \
+  > "$detected_hardware"
+unset nvidia_enabled
+
 flake_ref="path:$working_flake#$flake_attribute"
 
 printf '\nAvailable physical disks:\n\n'

@@ -5,6 +5,7 @@
 
 {
   imports = [
+    ./detected-hardware.nix
     ./disk.nix
     ./hardware-configuration.nix
     ./hyprland.nix
