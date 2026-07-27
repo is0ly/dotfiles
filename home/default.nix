@@ -6,7 +6,7 @@
     ./zsh.nix
     ./git.nix
     ./neovim.nix
-    ./ghostty.nix
+    ./foot.nix
     ./fuzzel.nix
     ./niri.nix
   ];

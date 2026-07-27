@@ -6,7 +6,7 @@
 
     settings = {
       main = {
-        font = "IoskeleyMono Nerd Font:size=10";
+        font = "IoskeleyMonoTerm Nerd Font SemiCondensed:size=20";
         pad = "16x12";
       };
 

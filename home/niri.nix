@@ -49,7 +49,7 @@
     }
 
     binds {
-        Mod+Return { spawn "ghostty"; }
+        Mod+Return { spawn "foot"; }
         Mod+D { spawn "fuzzel"; }
 
         Mod+Q repeat=false { close-window; }

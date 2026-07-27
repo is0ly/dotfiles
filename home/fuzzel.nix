@@ -7,7 +7,7 @@
     settings = {
       main = {
         font = "Iosevka Nerd Font:size=12";
-        terminal = "ghostty";
+        terminal = "foot";
         layer = "overlay";
         width = 40;
       };
