@@ -44,7 +44,5 @@
 
   programs.zsh.enable = true;
 
-  services.openssh.enable = true;
   system.stateVersion = "26.05";
-
 }

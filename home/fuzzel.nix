@@ -6,19 +6,19 @@
 
     settings = {
       main = {
-        font = "Iosevka Nerd Font:size=12";
+        font = "IoskeleyMonoTerm Nerd Font SemiCondensed:size=12";
         terminal = "foot";
         layer = "overlay";
         width = 40;
       };
 
       colors = {
-        background = "1e1e2eee";
-        text = "cdd6f4ff";
-        match = "89b4faff";
-        selection = "313244ff";
-        selection-text = "cdd6f4ff";
-        border = "89b4faff";
+        background = "1d2021eb";
+        text = "ebdbb2ff";
+        match = "fabd2fff";
+        selection = "504945ff";
+        selection-text = "fbf1c7ff";
+        border = "d79921ff";
       };
 
       border = {

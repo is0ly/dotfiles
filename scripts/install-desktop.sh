@@ -2,7 +2,7 @@
 
 set -Eeuo pipefail
 
-flake_ref="${NIXOS_INSTALL_FLAKE:-github:is0ly/dotfiles#desktop}"
+flake_ref="${NIXOS_INSTALL_FLAKE:-}"
 luks_password_file="/tmp/disko-password"
 luks_password_created=false
 temporary_directory=""
@@ -35,6 +35,9 @@ if [[ "$EUID" -ne 0 ]]; then
   fail "run this command with sudo"
 fi
 
+[[ -n "$flake_ref" ]] \
+  || fail "run the installer through: nix run github:is0ly/dotfiles#install"
+
 source_flake="${flake_ref%#*}"
 flake_attribute="${flake_ref##*#}"
 
@@ -45,6 +48,7 @@ temporary_directory="$(mktemp -d /tmp/nixos-desktop-install.XXXXXXXXXX)"
 working_flake="$temporary_directory/config"
 mkdir -p -- "$working_flake"
 cp -a -- "$source_flake/." "$working_flake/"
+chmod -R u+w -- "$working_flake"
 
 hardware_config="$working_flake/hosts/desktop/hardware-configuration.nix"
 chmod u+w -- "$hardware_config"
