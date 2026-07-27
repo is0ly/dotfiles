@@ -8,7 +8,7 @@
     ./neovim.nix
     ./ghostty.nix
     ./fuzzel.nix
-    ./hyprland.nix
+    ./niri.nix
   ];
 
   home.username = "ilia";

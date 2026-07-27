@@ -14,7 +14,7 @@ check:
 
 rebuild:
     git add -A
-    sudo nixos-rebuild switch --flake .#nixos
+    sudo nixos-rebuild switch --flake .#desktop
 
 update:
     nix flake update
