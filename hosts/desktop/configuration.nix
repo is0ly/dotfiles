@@ -40,6 +40,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     ioskeley-mono.semiCondensed-term-NF
+    ioskeley-mono.semiCondensed-NF
   ];
 
   programs.zsh.enable = true;
