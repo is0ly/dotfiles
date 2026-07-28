@@ -2,11 +2,10 @@
   description = "Ilia's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,7 +19,6 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
       disko,
       ...
@@ -28,7 +26,6 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
 
       installer = pkgs.writeShellApplication {
         name = "install-desktop";
@@ -60,9 +57,6 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {
-              inherit pkgsUnstable;
-            };
             home-manager.users.ilia.imports = [ ./home/default.nix ];
           }
         ];

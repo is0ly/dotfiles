@@ -1,7 +1,7 @@
-{ pkgsUnstable, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = [
-    pkgsUnstable.noctalia
+    pkgs.noctalia
   ];
 }
