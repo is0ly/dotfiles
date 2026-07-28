@@ -39,6 +39,8 @@
 
     prefer-no-csd
 
+    spawn-at-startup "noctalia"
+
     window-rule {
         geometry-corner-radius 8
         clip-to-geometry true
@@ -50,7 +52,7 @@
 
     binds {
         Mod+Return { spawn "foot"; }
-        Mod+D { spawn "fuzzel"; }
+        Mod+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
 
         Mod+Q repeat=false { close-window; }
         Mod+M { quit; }

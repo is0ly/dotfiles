@@ -13,6 +13,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    noctalia.url = "github:noctalia-dev/noctalia";
   };
 
   outputs =
@@ -21,6 +23,7 @@
       nixpkgs,
       home-manager,
       disko,
+      noctalia,
       ...
     }:
     let
@@ -57,7 +60,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ilia = import ./home/default.nix;
+            home-manager.users.ilia.imports = [
+              noctalia.homeModules.default
+              ./home/default.nix
+            ];
           }
         ];
       };

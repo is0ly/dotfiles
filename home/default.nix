@@ -9,6 +9,7 @@
     ./foot.nix
     ./fuzzel.nix
     ./niri.nix
+    ./noctalia.nix
   ];
 
   home.username = "ilia";
