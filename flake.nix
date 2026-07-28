@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
@@ -13,22 +14,21 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    noctalia.url = "github:noctalia-dev/noctalia/cachix";
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       disko,
-      noctalia,
       ...
     }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
 
       installer = pkgs.writeShellApplication {
         name = "install-desktop";
@@ -60,10 +60,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ilia.imports = [
-              noctalia.homeModules.default
-              ./home/default.nix
-            ];
+            home-manager.extraSpecialArgs = {
+              inherit pkgsUnstable;
+            };
+            home-manager.users.ilia.imports = [ ./home/default.nix ];
           }
         ];
       };
