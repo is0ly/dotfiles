@@ -1,13 +1,8 @@
-{
-  niriPackage,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   programs.niri = {
     enable = true;
-    package = niriPackage;
     useNautilus = false;
   };
 
