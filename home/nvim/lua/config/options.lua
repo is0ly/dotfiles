@@ -1,0 +1,2 @@
+-- Options are loaded before lazy.nvim starts.
+-- Add NixOS-specific Neovim options here.

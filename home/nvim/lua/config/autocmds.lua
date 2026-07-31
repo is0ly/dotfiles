@@ -1,0 +1,2 @@
+-- Autocommands are loaded automatically on LazyVim's VeryLazy event.
+-- Nix formatting on save is provided by LazyVim's Nix extra through conform.nvim.
