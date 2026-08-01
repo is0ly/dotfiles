@@ -32,7 +32,7 @@ in
       # This is a desktop GPU, so laptop-oriented fine-grained power management
       # should stay disabled.
       powerManagement = {
-        enable = false;
+        enable = true;
         finegrained = false;
       };
     };
