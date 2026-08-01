@@ -36,6 +36,9 @@ require("lazy").setup({
   install = {
     colorscheme = { "flexoki-light", "habamax" },
   },
+  rocks = {
+    enabled = false,
+  },
   checker = {
     enabled = true,
     notify = false,

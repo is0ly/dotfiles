@@ -8,5 +8,47 @@
     fastfetch
     nixfmt
     just
+
+    vlc
+
+    firefox
+    google-chrome
+
+    telegram-desktop
+
+    spotify
+
+    qbittorrent
+
+    lazygit
+
+    yazi
+
+    zip
+    xz
+    unzip
+    p7zip
+
+    #utils
+    ripgrep
+    jq
+    yq-go
+    fzf
+    fd
+    zellij
+    zoxide
+
+    ponysay
+    tree
+    cbonsai
+
+    glow
+
+    dust
+
+    btop
+
+    babashka
+
   ];
 }

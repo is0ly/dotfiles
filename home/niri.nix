@@ -18,6 +18,12 @@
         focus-follows-mouse max-scroll-amount="0%"
     }
 
+    output "HDMI-A-1" {
+      mode "3840x2160@143.988"
+      scale 1.5
+      variable-refresh-rate on-demand=true
+    }
+
     layout {
         gaps 10
         center-focused-column "never"
@@ -75,6 +81,10 @@
         Mod+Shift+3 { move-window-to-workspace 3; }
         Mod+Shift+4 { move-window-to-workspace 4; }
         Mod+Shift+5 { move-window-to-workspace 5; }
+
+        Mod+R { switch-preset-column-width; }
+        Mod+Minus {set-column-width "-10%";}
+        Mod+Equal {set-column-width "+10%";}
     }
   '';
 }

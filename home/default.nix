@@ -10,12 +10,14 @@
     ./fuzzel.nix
     ./niri.nix
     ./noctalia.nix
+    ./direnv.nix
   ];
 
-  home.username = "ilia";
-  home.homeDirectory = "/home/ilia";
-
-  home.stateVersion = "26.05";
+  home = {
+    username = "ilia";
+    homeDirectory = "/home/ilia";
+    stateVersion = "26.05";
+  };
 
   programs.home-manager.enable = true;
 }
