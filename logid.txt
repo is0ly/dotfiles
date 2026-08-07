@@ -1,0 +1,11 @@
+[INFO] Config file does not exist, using empty config.
+[DEBUG] Unsupported device /dev/hidraw9 ignored
+[DEBUG] Unsupported device /dev/hidraw5 ignored
+[DEBUG] Unsupported device /dev/hidraw6 ignored
+[DEBUG] Unsupported device /dev/hidraw7 ignored
+[DEBUG] Unsupported device /dev/hidraw8 ignored
+[DEBUG] Unsupported device /dev/hidraw0 ignored
+[DEBUG] Unsupported device /dev/hidraw1 ignored
+[INFO] Detected receiver at /dev/hidraw2
+[DEBUG] Unsupported device /dev/hidraw3 ignored
+[DEBUG] Unsupported device /dev/hidraw4 ignored

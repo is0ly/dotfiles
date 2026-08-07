@@ -85,6 +85,9 @@
         Mod+R { switch-preset-column-width; }
         Mod+Minus {set-column-width "-10%";}
         Mod+Equal {set-column-width "+10%";}
+
+      //  MouseForward repeat=false { spawn "foot"; }
+       // MouseBack repeat=false { close-window; }
     }
   '';
 }

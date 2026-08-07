@@ -13,6 +13,7 @@
 
     firefox
     google-chrome
+    brave
 
     telegram-desktop
 
@@ -49,6 +50,8 @@
     btop
 
     babashka
+
+    logiops
 
   ];
 }

@@ -13,7 +13,7 @@
       gcc
       lazygit
       lua-language-server
-      nil
+      nixd
       ripgrep
       statix
       stylua

@@ -7,10 +7,14 @@
     ./git.nix
     ./neovim.nix
     ./foot.nix
-    ./fuzzel.nix
     ./niri.nix
     ./noctalia.nix
     ./direnv.nix
+    ./zoxide.nix
+    ./vscode.nix
+    ./modules/yandex-browser.nix
+    ./obs.nix
+    ./emacs.nix
   ];
 
   home = {

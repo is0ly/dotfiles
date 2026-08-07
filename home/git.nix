@@ -3,7 +3,10 @@
 {
   programs.git = {
     enable = true;
-    userName = "is0ly";
-    userEmail = "iljaosipov@gmail.com";
+
+    settings = {
+      user.name = "is0ly";
+      user.email = "iljaosipov@gmail.com";
+    };
   };
 }

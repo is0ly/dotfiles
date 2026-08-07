@@ -36,5 +36,33 @@ in
         finegrained = false;
       };
     };
+    # The driver caches freed buffers instead of returning them, which suits
+    # games but not compositors: niri constantly creates and destroys buffers
+    # of varying sizes, so the pool grows without ever shrinking. Setting the
+    # reuse ratio to 0 disables that caching for niri only.
+    environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool".text =
+      builtins.toJSON
+        {
+          rules = [
+            {
+              pattern = {
+                feature = "procname";
+                matches = "niri";
+              };
+              profile = "Limit Free Buffer Pool On Wayland Compositors";
+            }
+          ];
+          profiles = [
+            {
+              name = "Limit Free Buffer Pool On Wayland Compositors";
+              settings = [
+                {
+                  key = "GLVidHeapReuseRatio";
+                  value = 0;
+                }
+              ];
+            }
+          ];
+        };
   };
 }

@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =
@@ -22,6 +27,7 @@
       nixpkgs,
       home-manager,
       disko,
+      nix-doom-emacs-unstraightened,
       ...
     }:
     let
@@ -58,7 +64,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ilia.imports = [ ./home/default.nix ];
+            home-manager.users.ilia.imports = [
+              nix-doom-emacs-unstraightened.homeModule
+              ./home/default.nix
+            ];
           }
         ];
       };
