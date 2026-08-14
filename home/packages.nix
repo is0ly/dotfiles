@@ -13,7 +13,7 @@
 
     firefox
     google-chrome
-    brave
+
 
     telegram-desktop
 
@@ -50,8 +50,23 @@
     btop
 
     babashka
+    pkg-config
+    sdl3
+    llvm
+    gcc
+    gdb
+    python3
 
     logiops
 
+    zls
+    nixd
+    clojure-lsp
+    clojure
+    sbcl
+    clang-tools
+    emacsPackages.treesit-grammars.with-all-grammars
+
+    vim
   ];
 }

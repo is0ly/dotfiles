@@ -33,9 +33,9 @@
         }
 
         focus-ring {
-            width 2
-            active-color "#d79921"
-            inactive-color "#504945"
+            width 1
+            active-color "#6E4F5F"
+            inactive-color "#3E3940"
         }
 
         border {
@@ -48,7 +48,7 @@
     spawn-at-startup "noctalia"
 
     window-rule {
-        geometry-corner-radius 8
+        geometry-corner-radius 3
         clip-to-geometry true
     }
 
@@ -85,6 +85,9 @@
         Mod+R { switch-preset-column-width; }
         Mod+Minus {set-column-width "-10%";}
         Mod+Equal {set-column-width "+10%";}
+
+        Mod+W {expand-column-to-available-width;}
+
 
       //  MouseForward repeat=false { spawn "foot"; }
        // MouseBack repeat=false { close-window; }

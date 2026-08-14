@@ -5,13 +5,11 @@
     ./packages.nix
     ./zsh.nix
     ./git.nix
-    ./neovim.nix
     ./foot.nix
     ./niri.nix
     ./noctalia.nix
     ./direnv.nix
     ./zoxide.nix
-    ./vscode.nix
     ./modules/yandex-browser.nix
     ./obs.nix
     ./emacs.nix

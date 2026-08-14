@@ -1,2 +1,0 @@
--- Keymaps are loaded automatically on LazyVim's VeryLazy event.
--- Add custom keymaps here.
