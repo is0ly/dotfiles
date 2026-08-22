@@ -1,41 +1,4 @@
-# { ... }:
-#
-# {
-#   hardware.uinput.enable = true;
-#
-#   services.evremap.enable = false;
-#
-#   services.logiops = {
-#     enable = true;
-#
-#     config = {
-#       devices = [
-#         {
-#           name = "MX Master 4";
-#
-#           buttons = [
-#             {
-#               cid = 195; # 0xc3 — проверенная верхняя кнопка
-#
-#               action = {
-#                 type = "Keypress";
-#                 keys = [
-#                   "KEY_LEFTMETA"
-#                   "BTN_MIDDLE"
-#                 ];
-#               };
-#             }
-#           ];
-#         }
-#       ];
-#     };
-#   };
-# }
-#
-#
-#
-#
-{ ... }:
+{ pkgs, ... }:
 
 {
   hardware.uinput.enable = true;
@@ -96,6 +59,18 @@
           ];
         }
       ];
+    };
+  };
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="hid", ENV{HID_ID}=="0005:0000046D:0000B042", TAG+="systemd", ENV{SYSTEMD_WANTS}+="logid-restart.service"
+  '';
+
+  systemd.services.logid-restart = {
+    description = "Restart logid once the mouse hidraw device shows up";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/systemctl restart logid.service";
     };
   };
 }

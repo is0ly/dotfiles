@@ -18,10 +18,18 @@
         focus-follows-mouse max-scroll-amount="0%"
     }
 
+    output "DP-1" {
+        mode "1920x1080@60.000"
+        scale 1
+        position x=0 y=0
+    }
+
     output "HDMI-A-1" {
-      mode "3840x2160@143.988"
-      scale 1.5
-      variable-refresh-rate on-demand=true
+        mode "3840x2160@143.988"
+        scale 1.25
+        position x=1920 y=0
+        variable-refresh-rate on-demand=true
+        focus-at-startup
     }
 
     layout {
@@ -47,6 +55,8 @@
 
     spawn-at-startup "noctalia"
 
+    spawn-at-startup "sh" "-c" "sleep 3 && openrgb --profile /home/ilia/.config/OpenRGB/1.orp && openrgb --device 2 --mode direct --color FFFFFF"
+
     window-rule {
         geometry-corner-radius 3
         clip-to-geometry true
@@ -55,6 +65,7 @@
     hotkey-overlay {
         skip-at-startup
     }
+
 
     binds {
         Mod+Return { spawn "foot"; }
@@ -82,15 +93,21 @@
         Mod+Shift+4 { move-window-to-workspace 4; }
         Mod+Shift+5 { move-window-to-workspace 5; }
 
+        Mod+Shift+Left { move-workspace-to-monitor-left; }
+        Mod+Shift+Right { move-workspace-to-monitor-right; }
+
         Mod+R { switch-preset-column-width; }
-        Mod+Minus {set-column-width "-10%";}
-        Mod+Equal {set-column-width "+10%";}
+        Mod+Minus { set-column-width "-10%"; }
+        Mod+Equal { set-column-width "+10%"; }
 
-        Mod+W {expand-column-to-available-width;}
+        Mod+W { expand-column-to-available-width; }
 
+        Mod+Shift+S { screenshot; }
+        Mod+Shift+F { screenshot-screen; }
+        Mod+Shift+W { screenshot-window; }
 
-      //  MouseForward repeat=false { spawn "foot"; }
-       // MouseBack repeat=false { close-window; }
+        // MouseForward repeat=false { spawn "foot"; }
+        // MouseBack repeat=false { close-window; }
     }
   '';
 }

@@ -13,8 +13,7 @@
 
     firefox
     google-chrome
-
-
+   
     telegram-desktop
 
     spotify
@@ -50,11 +49,6 @@
     btop
 
     babashka
-    pkg-config
-    sdl3
-    llvm
-    gcc
-    gdb
     python3
 
     logiops
@@ -66,6 +60,8 @@
     sbcl
     clang-tools
     emacsPackages.treesit-grammars.with-all-grammars
+    gdb
+    (callPackage ./pkgs/gf.nix {})
 
     vim
   ];

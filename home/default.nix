@@ -13,6 +13,7 @@
     ./modules/yandex-browser.nix
     ./obs.nix
     ./emacs.nix
+    ./gf.nix
   ];
 
   home = {
